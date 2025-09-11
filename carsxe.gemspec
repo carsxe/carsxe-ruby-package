@@ -5,7 +5,7 @@ require_relative "lib/carsxe/version"
 Gem::Specification.new do |spec|
   spec.name          = "carsxe"
   spec.version       = Carsxe::VERSION
-  spec.authors       = ["CarsXE Developer", "Omar Welied"]
+  spec.authors       = ["CarsXE Developer", "Omar Walied"]
   spec.email         = ["devops@carsxe.com", "omar.walied@carsxe.com"]
 
   spec.summary       = "A Ruby gem for interacting with CarsXE APIs."
