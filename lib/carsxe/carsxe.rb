@@ -56,17 +56,23 @@ module Carsxe
     end
 
     def plate_image_recognition(params = {})
-      raise ArgumentError, "Missing required parameter: upload_url" unless params && params["upload_url"]
-
-      url = "#{api_base_url}/platerecognition"
-      post_json(url, { "upload_url" => params["upload_url"], "key" => api_key, "source" => "gem" })
+      url = "#{api_base_url}/platerecognition?key=#{api_key}&source=ruby"
+      if params.size == 1
+        first_key, first_value = params.first
+        post_json(url, { first_key => first_value })
+      else
+        raise ArgumentError, "Expected exactly one parameter, but got #{params.size}"
+      end
     end
 
     def vin_ocr(params = {})
-      raise ArgumentError, "Missing required parameter: upload_url" unless params && params["upload_url"]
-
-      url = "#{api_base_url}/v1/vinocr"
-      post_json(url, { "upload_url" => params["upload_url"], "key" => api_key, "source" => "gem" })
+      url = "#{api_base_url}/v1/vinocr?key=#{api_key}&source=ruby"
+      if params.size == 1
+        first_key, first_value = params.first
+        post_json(url, { first_key => first_value })
+      else
+        raise ArgumentError, "Expected exactly one parameter, but got #{params.size}"
+      end
     end
 
     def year_make_model(params = {})
@@ -158,7 +164,7 @@ module Carsxe
       uri = URI(url_str)
       http = Net::HTTP.new(uri.host, uri.port)
       http.use_ssl = uri.scheme == "https"
-      req = Net::HTTP::Post.new(uri.path)
+      req = Net::HTTP::Post.new(uri)
       req["Content-Type"] = "application/json"
       req.body = payload.to_json
       response = http.request(req)

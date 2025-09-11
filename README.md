@@ -1,43 +1,297 @@
-# Carsxe
+# 🚗 CarsXE API (Ruby Gem)
 
-TODO: Delete this and the text below, and describe your gem
+[![Gem Version](https://img.shields.io/gem/v/carsxe.svg)](https://rubygems.org/gems/carsxe)
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/carsxe`. To experiment with that code, run `bin/console` for an interactive prompt.
+**CarsXE** is a powerful and developer-friendly API that gives you instant access to a wide range of vehicle data. From VIN decoding and market value estimation to vehicle history, images, OBD code explanations, and plate recognition, CarsXE provides everything you need to build automotive applications at scale.
 
-## Installation
+🌐 **Website:** [https://api.carsxe.com](https://api.carsxe.com)  
+📄 **Docs:** [https://api.carsxe.com/docs](https://api.carsxe.com/docs)  
+📦 **All Products:** [https://api.carsxe.com/all-products](https://api.carsxe.com/all-products)
 
-TODO: Replace `UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG` with your gem name right after releasing it to RubyGems.org. Please do not do it earlier due to security reasons. Alternatively, replace this section with instructions to install your gem from git if you don't plan to release to RubyGems.org.
+To get started with the CarsXE API, follow these steps:
 
-Install the gem and add to the application's Gemfile by executing:
+1. **Sign up for a CarsXE account:**
 
-```bash
-bundle add UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG
-```
+   - [Register here](https://api.carsxe.com/register)
+   - Add a [payment method](https://api.carsxe.com/dashboard/billing#payment-methods) to activate your subscription and get your API key.
 
-If bundler is not being used to manage dependencies, install the gem by executing:
+2. **Install the CarsXE Ruby gem:**
 
-```bash
-gem install UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG
-```
+   Run this command in your terminal:
+
+   ```bash
+   gem install carsxe
+   ```
+
+   Or add it to your Gemfile:
+
+   ```ruby
+   gem 'carsxe'
+   ```
+
+   Then run `bundle install`.
+
+3. **Require the CarsXE API in your code:**
+
+   ```ruby
+   require 'carsxe'
+   ```
+
+4. **Initialize the API with your API key:**
+
+   ```ruby
+   API_KEY = 'YOUR_API_KEY'
+   carsxe = Carsxe::CarsXE.new(api_key: API_KEY)
+   ```
+
+5. **Use the various endpoint methods provided by the API to access the data you need.**
 
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+vin = 'WBAFR7C57CC811956'
 
-## Development
+begin
+  vehicle = carsxe.specs('vin' => vin)
+  puts vehicle['input']['vin']
+rescue StandardError => error
+  puts "Error: #{error.message}"
+end
+```
 
-After checking out the repo, run `bin/setup` to install dependencies. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+---
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and the created tag, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+## 📚 Endpoints
 
-## Contributing
+The CarsXE API provides the following endpoint methods:
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/carsxe. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/[USERNAME]/carsxe/blob/master/CODE_OF_CONDUCT.md).
+### `specs` – Decode VIN & get full vehicle specifications
 
-## License
+**Required:**
 
-The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+- `vin`
 
-## Code of Conduct
+**Optional:**
 
-Everyone interacting in the Carsxe project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/carsxe/blob/master/CODE_OF_CONDUCT.md).
+- `deepdata`
+- `disableIntVINDecoding`
+
+**Example:**
+
+```ruby
+vehicle = carsxe.specs('vin' => 'WBAFR7C57CC811956')
+```
+
+---
+
+### `int_vin_decoder` – Decode VIN with worldwide support
+
+**Required:**
+
+- `vin`
+
+**Optional:**
+
+- None
+
+**Example:**
+
+```ruby
+intvin = carsxe.int_vin_decoder('vin' => 'WF0MXXGBWM8R43240')
+```
+
+---
+
+### `plate_decoder` – Decode license plate info (plate, country)
+
+**Required:**
+
+- `plate`
+- `country` (always required except for US, where it is optional and defaults to 'US')
+
+**Optional:**
+
+- `state` (required for some countries, e.g. US, AU, CA)
+- `district` (required for Pakistan)
+
+> **Note:**
+>
+> - The `state` parameter is required only when applicable (for
+>   specific countries such as US, AU, CA, etc.).
+> - For Pakistan (`country='pk'`), both `state` and `district`
+>   are required.
+
+**Example:**
+
+```ruby
+decoded_plate = carsxe.plate_decoder('plate' => '7XER187', 'state' => 'CA', 'country' => 'US')
+```
+
+---
+
+### `market_value` – Estimate vehicle market value based on VIN
+
+**Required:**
+
+- `vin`
+
+**Optional:**
+
+- `state`
+
+**Example:**
+
+```ruby
+marketvalue = carsxe.market_value('vin' => 'WBAFR7C57CC811956')
+```
+
+---
+
+### `history` – Retrieve vehicle history
+
+**Required:**
+
+- `vin`
+
+**Optional:**
+
+- None
+
+**Example:**
+
+```ruby
+history = carsxe.history('vin' => 'WBAFR7C57CC811956')
+```
+
+---
+
+### `images` – Fetch images by make, model, year, trim
+
+**Required:**
+
+- `make`
+- `model`
+
+**Optional:**
+
+- `year`
+- `trim`
+- `color`
+- `transparent`
+- `angle`
+- `photoType`
+- `size`
+- `license`
+
+**Example:**
+
+```ruby
+images = carsxe.images('make' => 'BMW', 'model' => 'X5', 'year' => '2019')
+```
+
+---
+
+### `recalls` – Get safety recall data for a VIN
+
+**Required:**
+
+- `vin`
+
+**Optional:**
+
+- None
+
+**Example:**
+
+```ruby
+recalls = carsxe.recalls('vin' => '1C4JJXR64PW696340')
+```
+
+---
+
+### `plate_image_recognition` – Read & decode plates from images
+
+**Required:**
+
+- `upload_url`
+
+**Optional:**
+
+- None
+
+**Example:**
+
+```ruby
+plateimg = carsxe.plate_image_recognition('upload_url' => 'https://api.carsxe.com/img/apis/plate_recognition.JPG')
+```
+
+---
+
+### `vin_ocr` – Extract VINs from images using OCR
+
+**Required:**
+
+- `upload_url`
+
+**Optional:**
+
+- None
+
+**Example:**
+
+```ruby
+vinocr = carsxe.vin_ocr('upload_url' => 'https://api.carsxe.com/img/apis/plate_recognition.JPG')
+```
+
+---
+
+### `year_make_model` – Query vehicle by year, make, model and trim (optional)
+
+**Required:**
+
+- `year`
+- `make`
+- `model`
+
+**Optional:**
+
+- `trim`
+
+**Example:**
+
+```ruby
+yymm = carsxe.year_make_model('year' => '2012', 'make' => 'BMW', 'model' => '5 Series')
+```
+
+---
+
+### `obd_codes_decoder` – Decode OBD error/diagnostic codes
+
+**Required:**
+
+- `code`
+
+**Optional:**
+
+- None
+
+**Example:**
+
+```ruby
+obdcode = carsxe.obd_codes_decoder('code' => 'P0115')
+```
+
+---
+
+## Notes & Best Practices
+
+- **Parameter requirements:** Each endpoint requires specific parameters—see the Required/Optional fields above.
+- **Return values:** All responses are Ruby hashes for easy access and manipulation.
+- **Error handling:** Use begin/rescue blocks to gracefully handle API errors.
+- **More info:** For advanced usage and full details, visit the [official API documentation](https://api.carsxe.com/docs).
+
+---
+
+## Overall
+
+CarsXE API provides a wide range of powerful, easy-to-use tools for accessing and integrating vehicle data into your applications and services. Whether you're a developer or a business owner, you can quickly get the information you need to take your projects to the next level—without hassle or inconvenience.
