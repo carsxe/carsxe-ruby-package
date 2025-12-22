@@ -11,7 +11,6 @@
 To get started with the CarsXE API, follow these steps:
 
 1. **Sign up for a CarsXE account:**
-
    - [Register here](https://api.carsxe.com/register)
    - Add a [payment method](https://api.carsxe.com/dashboard/billing#payment-methods) to activate your subscription and get your API key.
 
@@ -279,6 +278,24 @@ yymm = carsxe.year_make_model('year' => '2012', 'make' => 'BMW', 'model' => '5 S
 
 ```ruby
 obdcode = carsxe.obd_codes_decoder('code' => 'P0115')
+```
+
+---
+
+### `lien_and_theft` – Check for lien and theft records
+
+**Required:**
+
+- `vin`
+
+**Optional:**
+
+- None
+
+**Example:**
+
+```ruby
+lientheft = carsxe.lien_and_theft('vin' => '2C3CDXFG1FH762860')
 ```
 
 ---

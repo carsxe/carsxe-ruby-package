@@ -83,6 +83,10 @@ module Carsxe
       get("obdcodesdecoder", params, Types::OBDCODESDECODER_INPUT)
     end
 
+    def lien_and_theft(params = {})
+      get("v1/lien-theft", params, Types::VIN_INPUT)
+    end
+
     private
 
     # Determine required and optional keys from a param definition hash.
