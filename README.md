@@ -137,6 +137,8 @@ decoded_plate = carsxe.plate_decoder('plate' => '7XER187', 'state' => 'CA', 'cou
 **Optional:**
 
 - `state`
+- `mileage`
+- `condition`
 
 **Example:**
 
