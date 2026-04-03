@@ -143,7 +143,7 @@ decoded_plate = carsxe.plate_decoder('plate' => '7XER187', 'state' => 'CA', 'cou
 **Example:**
 
 ```ruby
-marketvalue = carsxe.market_value('vin' => 'WBAFR7C57CC811956')
+marketvalue = carsxe.market_value('vin' => 'WBAFR7C57CC811956', 'state' => 'CA', 'mileage' => '80000', 'condition' => 'good')
 ```
 
 ---

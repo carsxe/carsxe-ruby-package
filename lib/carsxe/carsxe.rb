@@ -44,11 +44,7 @@ module Carsxe
     end
 
     def market_value(params = {})
-      # market_value: same required params as VIN_INPUT but 'state' is allowed optional
-      required, optional = required_optional(Types::VIN_INPUT, params)
-      optional |= ["state"]
-      url, query = build_url("v2/marketvalue", params, required, optional)
-      perform_get(url, query)
+      get("v2/marketvalue", params, Types::MARKET_VALUE_INPUT)
     end
 
     def history(params = {})

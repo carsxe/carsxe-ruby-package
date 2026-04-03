@@ -9,6 +9,13 @@ module Carsxe
       "vin" => :required
     }.freeze
 
+    MARKET_VALUE_INPUT = {
+      "vin"       => :required,
+      "state"     => :optional,
+      "mileage"   => :optional,
+      "condition" => :optional
+    }.freeze
+
     PLATE_DECODER_PARAMS = {
       "plate"    => :required,
       "country"  => :optional, # country is allowed but not strictly required by default
