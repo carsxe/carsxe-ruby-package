@@ -55,7 +55,7 @@ module Carsxe
       url = "#{api_base_url}/platerecognition?key=#{api_key}&source=ruby"
       if params.size == 1
         first_key, first_value = params.first
-        post_json(url, { first_key => first_value })
+        post_json(url, {first_key => first_value})
       else
         raise ArgumentError, "Expected exactly one parameter, but got #{params.size}"
       end
@@ -65,7 +65,7 @@ module Carsxe
       url = "#{api_base_url}/v1/vinocr?key=#{api_key}&source=ruby"
       if params.size == 1
         first_key, first_value = params.first
-        post_json(url, { first_key => first_value })
+        post_json(url, {first_key => first_value})
       else
         raise ArgumentError, "Expected exactly one parameter, but got #{params.size}"
       end
@@ -149,10 +149,10 @@ module Carsxe
       # Special case for plate decoder params
       if param_def.equal?(Types::PLATE_DECODER_PARAMS)
         country = if params && params["country"]
-                    params["country"].to_s.downcase
-                  else
-                    "us"
-                  end
+          params["country"].to_s.downcase
+        else
+          "us"
+        end
 
         if country == "pk" || country == "pakistan"
           required |= ["state", "district"]
@@ -168,7 +168,7 @@ module Carsxe
       if params
         missing = required.reject { |k| params.key?(k) && !params[k].nil? }
         unless missing.empty?
-          raise ArgumentError, "Missing required parameter(s): #{missing.join(', ')}"
+          raise ArgumentError, "Missing required parameter(s): #{missing.join(", ")}"
         end
       end
 
