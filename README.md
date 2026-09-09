@@ -302,10 +302,210 @@ lientheft = carsxe.lien_and_theft('vin' => '2C3CDXFG1FH762860')
 
 ---
 
+### `recalls_ymm` – Get safety recalls by year, make, and model
+
+**Required:**
+
+- `year`
+- `make`
+- `model`
+
+**Optional:**
+
+- None
+
+**Example:**
+
+```ruby
+recalls_ymm = carsxe.recalls_ymm('year' => '2026', 'make' => 'toyota', 'model' => 'corolla')
+```
+
+---
+
+### `recalls_batch_submit` – Submit VINs for bulk recall checking
+
+**Required (at least one of):**
+
+- `vins`
+- `csv`
+- `csvUrl`
+
+**Optional:**
+
+- `webhookUrl`
+
+**Example:**
+
+```ruby
+batch = carsxe.recalls_batch_submit('vins' => ['1HGBH41JXMN109186', '5YJSA1E26HF000001'])
+```
+
+---
+
+### `recalls_batch_status` – Check a bulk recalls batch
+
+**Required:**
+
+- `batchId`
+
+**Optional:**
+
+- None
+
+**Example:**
+
+```ruby
+status = carsxe.recalls_batch_status('batchId' => 'brb_mnablbn7_wvbaqv')
+```
+
+---
+
+### `recalls_batch_results` – Fetch bulk recalls results as JSON
+
+**Required:**
+
+- `batchId`
+
+**Optional:**
+
+- None
+
+**Example:**
+
+```ruby
+results = carsxe.recalls_batch_results('batchId' => 'brb_mnablbn7_wvbaqv')
+```
+
+---
+
+### `recalls_batch_download` – Download bulk recalls results as CSV
+
+**Required:**
+
+- `batchId`
+
+**Optional:**
+
+- None
+
+**Example:**
+
+```ruby
+csv = carsxe.recalls_batch_download('batchId' => 'brb_mnablbn7_wvbaqv')
+```
+
+---
+
+### `ymm_options` – List year, make, model, trim, or variant options
+
+**Required:**
+
+- None
+
+**Optional:**
+
+- `dimension`
+- `year`
+- `make`
+- `model`
+- `trim`
+
+**Example:**
+
+```ruby
+options = carsxe.ymm_options('year' => '2026', 'make' => 'Toyota')
+```
+
+---
+
+### `ownership_vin` – Look up registered owner(s) by VIN
+
+**Required:**
+
+- `vin`
+
+**Optional:**
+
+- `include`
+
+**Example:**
+
+```ruby
+owners = carsxe.ownership_vin('vin' => '1FT8X3BT0BEA61538')
+```
+
+---
+
+### `ownership_person` – Look up ownership by name and address
+
+**Required:**
+
+- `first_name`
+- `last_name`
+- `address`
+- `zip`
+
+**Optional:**
+
+- `include`
+
+**Example:**
+
+```ruby
+person = carsxe.ownership_person('first_name' => 'John', 'last_name' => 'Sample', 'address' => '123 Example St', 'zip' => '90210')
+```
+
+---
+
+### `ownership_address` – Look up residents at a street address
+
+**Required:**
+
+- `address`
+- `zip`
+
+**Optional:**
+
+- `include`
+- `variant`
+
+**Example:**
+
+```ruby
+address = carsxe.ownership_address('address' => '123 Example St', 'zip' => '90210')
+```
+
+---
+
+### `ownership_zip` – Search owners in a ZIP code
+
+**Required:**
+
+- `zip`
+
+**Optional:**
+
+- `gender`
+- `min_age`
+- `max_age`
+- `income`
+- `page`
+- `limit`
+- `include`
+- `variant`
+
+**Example:**
+
+```ruby
+zip_owners = carsxe.ownership_zip('zip' => '90210', 'limit' => '15')
+```
+
+---
+
 ## Notes & Best Practices
 
 - **Parameter requirements:** Each endpoint requires specific parameters—see the Required/Optional fields above.
-- **Return values:** All responses are Ruby hashes for easy access and manipulation.
+- **Return values:** Responses are Ruby hashes. `recalls_batch_download` returns CSV text.
 - **Error handling:** Use begin/rescue blocks to gracefully handle API errors.
 - **More info:** For advanced usage and full details, visit the [official API documentation](https://api.carsxe.com/docs).
 
