@@ -83,6 +83,59 @@ module Carsxe
       get("v1/lien-theft", params, Types::VIN_INPUT)
     end
 
+    def recalls_ymm(params = {})
+      get("v1/recalls-ymm", params, Types::RECALLS_YMM_INPUT)
+    end
+
+    def recalls_batch_submit(params = {})
+      unless params["vins"] || params["csv"] || params["csvUrl"]
+        raise ArgumentError, "Missing required parameter(s): vins, csv, or csvUrl"
+      end
+
+      url = "#{api_base_url}/v1/recalls-batch/submit?key=#{api_key}&source=ruby"
+      payload = {}
+      %w[vins csv csvUrl webhookUrl].each do |key|
+        payload[key] = params[key] if params.key?(key) && !params[key].nil?
+      end
+      post_json(url, payload)
+    end
+
+    def recalls_batch_status(params = {})
+      get("v1/recalls-batch/status", params, Types::RECALLS_BATCH_INPUT)
+    end
+
+    def recalls_batch_results(params = {})
+      get("v1/recalls-batch/results", params, Types::RECALLS_BATCH_INPUT)
+    end
+
+    def recalls_batch_download(params = {})
+      get("v1/recalls-batch/download", params, Types::RECALLS_BATCH_INPUT)
+    end
+
+    def ymm_options(params = {})
+      get("v1/ymm-options", params, Types::YMM_OPTIONS_INPUT)
+    end
+
+    def ownership_vin(params = {})
+      get("v1/ownership/vin", params, Types::OWNERSHIP_VIN_INPUT)
+    end
+
+    def ownership_person(params = {})
+      get("v1/ownership/person", params, Types::OWNERSHIP_PERSON_INPUT)
+    end
+
+    def ownership_address(params = {})
+      get("v1/ownership/address", params, Types::OWNERSHIP_ADDRESS_INPUT)
+    end
+
+    def ownership_zip(params = {})
+      get("v1/ownership/zip", params, Types::OWNERSHIP_ZIP_INPUT)
+    end
+
+    def us_plate_decoder(params = {})
+      get("v1/us-platedecoder", params, Types::US_PLATE_DECODER_INPUT)
+    end
+
     private
 
     # Determine required and optional keys from a param definition hash.
@@ -173,8 +226,9 @@ module Carsxe
 
     def parse_response(response)
       body = response.body.to_s
-      parsed=JSON.parse(body) 
-      parsed
+      JSON.parse(body)
+    rescue JSON::ParserError
+      body
     end
   end
 end

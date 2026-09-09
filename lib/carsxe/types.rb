@@ -60,5 +60,61 @@ module Carsxe
       "deepData"                => :optional,
       "disableIntVINDecoding"   => :optional
     }.freeze
+
+    RECALLS_YMM_INPUT = {
+      "year"  => :required,
+      "make"  => :required,
+      "model" => :required
+    }.freeze
+
+    RECALLS_BATCH_INPUT = {
+      "batchId" => :required
+    }.freeze
+
+    YMM_OPTIONS_INPUT = {
+      "dimension" => :optional,
+      "year"      => :optional,
+      "make"      => :optional,
+      "model"     => :optional,
+      "trim"      => :optional
+    }.freeze
+
+    OWNERSHIP_VIN_INPUT = {
+      "vin"     => :required,
+      "include" => :optional
+    }.freeze
+
+    OWNERSHIP_PERSON_INPUT = {
+      "first_name" => :required,
+      "last_name"  => :required,
+      "address"    => :required,
+      "zip"        => :required,
+      "include"    => :optional
+    }.freeze
+
+    OWNERSHIP_ADDRESS_INPUT = {
+      "address" => :required,
+      "zip"     => :required,
+      "include" => :optional,
+      "variant" => :optional
+    }.freeze
+
+    OWNERSHIP_ZIP_INPUT = {
+      "zip"     => :required,
+      "gender"  => :optional,
+      "min_age" => :optional,
+      "max_age" => :optional,
+      "income"  => :optional,
+      "page"    => :optional,
+      "limit"   => :optional,
+      "include" => :optional,
+      "variant" => :optional
+    }.freeze
+
+    US_PLATE_DECODER_INPUT = {
+      "plate"     => :required,
+      "state"     => :required,
+      "decodeVIN" => :optional
+    }.freeze
   end
 end
