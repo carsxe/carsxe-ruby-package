@@ -132,10 +132,6 @@ module Carsxe
       get("v1/ownership/zip", params, Types::OWNERSHIP_ZIP_INPUT)
     end
 
-    def us_plate_decoder(params = {})
-      get("v1/us-platedecoder", params, Types::US_PLATE_DECODER_INPUT)
-    end
-
     private
 
     # Determine required and optional keys from a param definition hash.

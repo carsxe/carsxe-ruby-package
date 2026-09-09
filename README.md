@@ -502,25 +502,6 @@ zip_owners = carsxe.ownership_zip('zip' => '90210', 'limit' => '15')
 
 ---
 
-### `us_plate_decoder` – Decode a US license plate
-
-**Required:**
-
-- `plate`
-- `state`
-
-**Optional:**
-
-- `decodeVIN`
-
-**Example:**
-
-```ruby
-us_plate = carsxe.us_plate_decoder('plate' => 'H37SFS', 'state' => 'NJ')
-```
-
----
-
 ## Notes & Best Practices
 
 - **Parameter requirements:** Each endpoint requires specific parameters—see the Required/Optional fields above.

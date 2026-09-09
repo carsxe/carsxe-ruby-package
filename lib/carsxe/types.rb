@@ -111,11 +111,5 @@ module Carsxe
       "include" => :optional,
       "variant" => :optional
     }.freeze
-
-    US_PLATE_DECODER_INPUT = {
-      "plate" => :required,
-      "state" => :required,
-      "decodeVIN" => :optional
-    }.freeze
   end
 end
