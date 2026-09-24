@@ -4,9 +4,18 @@
 
 **CarsXE** is a powerful and developer-friendly API that gives you instant access to a wide range of vehicle data. From VIN decoding and market value estimation to vehicle history, images, OBD code explanations, and plate recognition, CarsXE provides everything you need to build automotive applications at scale.
 
-🌐 **Website:** [https://api.carsxe.com](https://api.carsxe.com)  
-📄 **Docs:** [https://api.carsxe.com/docs](https://api.carsxe.com/docs)  
-📦 **All Products:** [https://api.carsxe.com/all-products](https://api.carsxe.com/all-products)
+🌐 **Website:** [https://carsxe.com](https://carsxe.com)  
+📄 **Docs:** [https://docs.carsxe.com](https://docs.carsxe.com)
+
+### Products
+
+- [Vehicle History](https://carsxe.com/vehicle-history)
+- [Vehicle Plate Decoder](https://carsxe.com/vehicle-plate-decoder)
+- [Vehicle Specifications](https://carsxe.com/vehicle-specifications)
+- [International VIN Decoder](https://carsxe.com/international-vin-decoder)
+- [Vehicle Images](https://carsxe.com/vehicle-images)
+- [Vehicle Recalls](https://carsxe.com/vehicle-recalls)
+- [Vehicle Market Value](https://carsxe.com/vehicle-market-value)
 
 To get started with the CarsXE API, follow these steps:
 
@@ -64,7 +73,7 @@ end
 
 The CarsXE API provides the following endpoint methods:
 
-### `specs` – Decode VIN & get full vehicle specifications
+### `specs` – Decode VIN & get full vehicle specifications ([Vehicle Specifications](https://carsxe.com/vehicle-specifications))
 
 **Required:**
 
@@ -83,7 +92,7 @@ vehicle = carsxe.specs('vin' => 'WBAFR7C57CC811956')
 
 ---
 
-### `int_vin_decoder` – Decode VIN with worldwide support
+### `int_vin_decoder` – Decode VIN with worldwide support ([International VIN Decoder](https://carsxe.com/international-vin-decoder))
 
 **Required:**
 
@@ -101,7 +110,7 @@ intvin = carsxe.int_vin_decoder('vin' => 'WF0MXXGBWM8R43240')
 
 ---
 
-### `plate_decoder` – Decode license plate info (plate, country)
+### `plate_decoder` – Decode license plate info (plate, country) ([Vehicle Plate Decoder](https://carsxe.com/vehicle-plate-decoder))
 
 **Required:**
 
@@ -128,7 +137,7 @@ decoded_plate = carsxe.plate_decoder('plate' => '7XER187', 'state' => 'CA', 'cou
 
 ---
 
-### `market_value` – Estimate vehicle market value based on VIN
+### `market_value` – Estimate vehicle market value based on VIN ([Vehicle Market Value](https://carsxe.com/vehicle-market-value))
 
 **Required:**
 
@@ -148,7 +157,7 @@ marketvalue = carsxe.market_value('vin' => 'WBAFR7C57CC811956', 'state' => 'CA',
 
 ---
 
-### `history` – Retrieve vehicle history
+### `history` – Retrieve vehicle history ([Vehicle History](https://carsxe.com/vehicle-history))
 
 **Required:**
 
@@ -166,7 +175,7 @@ history = carsxe.history('vin' => 'WBAFR7C57CC811956')
 
 ---
 
-### `images` – Fetch images by make, model, year, trim
+### `images` – Fetch images by make, model, year, trim ([Vehicle Images](https://carsxe.com/vehicle-images))
 
 **Required:**
 
@@ -192,7 +201,7 @@ images = carsxe.images('make' => 'BMW', 'model' => 'X5', 'year' => '2019')
 
 ---
 
-### `recalls` – Get safety recall data for a VIN
+### `recalls` – Get safety recall data for a VIN ([Vehicle Recalls](https://carsxe.com/vehicle-recalls))
 
 **Required:**
 
@@ -210,7 +219,9 @@ recalls = carsxe.recalls('vin' => '1C4JJXR64PW696340')
 
 ---
 
-### `plate_image_recognition` – Read & decode plates from images
+### `plate_image_recognition` – Read & decode plates from images ([Vehicle Plate Decoder](https://carsxe.com/vehicle-plate-decoder))
+
+![Sample license plate](https://imagedelivery.net/moyiiSImjJPI_EZVxNMBBw/f49aed53-d736-4370-f3f4-97418841c800/public)
 
 **Required:**
 
@@ -223,7 +234,7 @@ recalls = carsxe.recalls('vin' => '1C4JJXR64PW696340')
 **Example:**
 
 ```ruby
-plateimg = carsxe.plate_image_recognition('upload_url' => 'https://api.carsxe.com/img/apis/plate_recognition.JPG')
+plateimg = carsxe.plate_image_recognition('upload_url' => 'https://imagedelivery.net/moyiiSImjJPI_EZVxNMBBw/f49aed53-d736-4370-f3f4-97418841c800/public')
 ```
 
 ---
@@ -241,7 +252,7 @@ plateimg = carsxe.plate_image_recognition('upload_url' => 'https://api.carsxe.co
 **Example:**
 
 ```ruby
-vinocr = carsxe.vin_ocr('upload_url' => 'https://api.carsxe.com/img/apis/plate_recognition.JPG')
+vinocr = carsxe.vin_ocr('upload_url' => 'https://imagedelivery.net/moyiiSImjJPI_EZVxNMBBw/f49aed53-d736-4370-f3f4-97418841c800/public')
 ```
 
 ---
@@ -302,7 +313,7 @@ lientheft = carsxe.lien_and_theft('vin' => '2C3CDXFG1FH762860')
 
 ---
 
-### `recalls_ymm` – Get safety recalls by year, make, and model
+### `recalls_ymm` – Get safety recalls by year, make, and model ([Vehicle Recalls](https://carsxe.com/vehicle-recalls))
 
 **Required:**
 
@@ -322,7 +333,7 @@ recalls_ymm = carsxe.recalls_ymm('year' => '2026', 'make' => 'toyota', 'model' =
 
 ---
 
-### `recalls_batch_submit` – Submit VINs for bulk recall checking
+### `recalls_batch_submit` – Submit VINs for bulk recall checking ([Vehicle Recalls](https://carsxe.com/vehicle-recalls))
 
 **Required (at least one of):**
 
@@ -342,7 +353,7 @@ batch = carsxe.recalls_batch_submit('vins' => ['1HGBH41JXMN109186', '5YJSA1E26HF
 
 ---
 
-### `recalls_batch_status` – Check a bulk recalls batch
+### `recalls_batch_status` – Check a bulk recalls batch ([Vehicle Recalls](https://carsxe.com/vehicle-recalls))
 
 **Required:**
 
@@ -360,7 +371,7 @@ status = carsxe.recalls_batch_status('batchId' => 'brb_mnablbn7_wvbaqv')
 
 ---
 
-### `recalls_batch_results` – Fetch bulk recalls results as JSON
+### `recalls_batch_results` – Fetch bulk recalls results as JSON ([Vehicle Recalls](https://carsxe.com/vehicle-recalls))
 
 **Required:**
 
@@ -378,7 +389,7 @@ results = carsxe.recalls_batch_results('batchId' => 'brb_mnablbn7_wvbaqv')
 
 ---
 
-### `recalls_batch_download` – Download bulk recalls results as CSV
+### `recalls_batch_download` – Download bulk recalls results as CSV ([Vehicle Recalls](https://carsxe.com/vehicle-recalls))
 
 **Required:**
 
@@ -507,7 +518,7 @@ zip_owners = carsxe.ownership_zip('zip' => '90210', 'limit' => '15')
 - **Parameter requirements:** Each endpoint requires specific parameters—see the Required/Optional fields above.
 - **Return values:** Responses are Ruby hashes. `recalls_batch_download` returns CSV text.
 - **Error handling:** Use begin/rescue blocks to gracefully handle API errors.
-- **More info:** For advanced usage and full details, visit the [official API documentation](https://api.carsxe.com/docs).
+- **More info:** For advanced usage and full details, visit the [official API documentation](https://docs.carsxe.com).
 
 ---
 
