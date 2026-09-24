@@ -221,6 +221,8 @@ recalls = carsxe.recalls('vin' => '1C4JJXR64PW696340')
 
 ### `plate_image_recognition` – Read & decode plates from images ([Vehicle Plate Decoder](https://carsxe.com/vehicle-plate-decoder))
 
+![Sample license plate](https://imagedelivery.net/moyiiSImjJPI_EZVxNMBBw/f49aed53-d736-4370-f3f4-97418841c800/public)
+
 **Required:**
 
 - `upload_url`
@@ -232,7 +234,7 @@ recalls = carsxe.recalls('vin' => '1C4JJXR64PW696340')
 **Example:**
 
 ```ruby
-plateimg = carsxe.plate_image_recognition('upload_url' => 'https://api.carsxe.com/img/apis/plate_recognition.JPG')
+plateimg = carsxe.plate_image_recognition('upload_url' => 'https://imagedelivery.net/moyiiSImjJPI_EZVxNMBBw/f49aed53-d736-4370-f3f4-97418841c800/public')
 ```
 
 ---
@@ -250,7 +252,7 @@ plateimg = carsxe.plate_image_recognition('upload_url' => 'https://api.carsxe.co
 **Example:**
 
 ```ruby
-vinocr = carsxe.vin_ocr('upload_url' => 'https://api.carsxe.com/img/apis/plate_recognition.JPG')
+vinocr = carsxe.vin_ocr('upload_url' => 'https://imagedelivery.net/moyiiSImjJPI_EZVxNMBBw/f49aed53-d736-4370-f3f4-97418841c800/public')
 ```
 
 ---
